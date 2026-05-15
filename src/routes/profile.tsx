@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { toast } from "sonner";
 import { ChevronRight, MapPin, CreditCard, Bell, HelpCircle, LogOut, Heart } from "lucide-react";
 import { PhoneShell } from "@/components/aladun/PhoneShell";
 
@@ -40,7 +41,10 @@ function ProfilePage() {
         <ul className="mt-5 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card shadow-card">
           {items.map(({ icon: Icon, label }) => (
             <li key={label}>
-              <button className="flex w-full items-center gap-3 px-4 py-3.5 text-left text-sm font-semibold">
+              <button
+                onClick={() => toast(label, { description: "This screen is coming soon." })}
+                className="flex w-full items-center gap-3 px-4 py-3.5 text-left text-sm font-semibold transition active:bg-muted/40"
+              >
                 <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary-soft text-primary">
                   <Icon className="h-4 w-4" />
                 </span>

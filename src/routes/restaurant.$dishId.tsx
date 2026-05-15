@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { toast } from "sonner";
 import { ArrowLeft, Heart, Star, Clock, Minus, Plus } from "lucide-react";
 import { PhoneShell } from "@/components/aladun/PhoneShell";
 import { dishes, formatNaira } from "@/lib/aladun-data";
@@ -20,6 +21,7 @@ function DishDetail() {
   const dish = dishes.find((d) => d.id === dishId);
   const [qty, setQty] = useState(1);
   const navigate = useNavigate();
+  const [liked, setLiked] = useState(false);
 
   if (!dish) {
     return (
@@ -38,6 +40,7 @@ function DishDetail() {
 
   const addAndGo = () => {
     for (let i = 0; i < qty; i++) cartStore.add(dish.id);
+    toast(`Added ${qty} × ${dish.name}`, { description: "Heading to your cart." });
     navigate({ to: "/cart" });
   };
 
@@ -52,8 +55,15 @@ function DishDetail() {
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
-          <button className="grid h-10 w-10 place-items-center rounded-full bg-surface/90 text-destructive shadow-card backdrop-blur">
-            <Heart className="h-5 w-5" />
+          <button
+            onClick={() => {
+              setLiked((v) => !v);
+              toast(liked ? "Removed from favourites" : "Added to favourites");
+            }}
+            aria-label="Favourite"
+            className="grid h-10 w-10 place-items-center rounded-full bg-surface/90 text-destructive shadow-card backdrop-blur transition active:scale-90"
+          >
+            <Heart className={`h-5 w-5 ${liked ? "fill-destructive" : ""}`} />
           </button>
         </div>
       </div>
