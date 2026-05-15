@@ -1,26 +1,88 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import jollof from "@/assets/jollof.jpg";
+import scooter from "@/assets/scooter.png";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Aladùn — Local African Dishes Delivered" },
+      {
+        name: "description",
+        content:
+          "Order authentic Nigerian and West African meals from local kitchens, delivered hot to your doorstep.",
+      },
+      { property: "og:title", content: "Aladùn — Local African Dishes Delivered" },
+      {
+        property: "og:description",
+        content:
+          "Order authentic Nigerian and West African meals from local kitchens, delivered hot to your doorstep.",
+      },
+    ],
+  }),
+  component: Onboarding,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Onboarding() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-dvh bg-muted/40 md:py-10">
+      <div className="relative mx-auto flex min-h-dvh w-full max-w-md flex-col overflow-hidden bg-gradient-brand md:min-h-[860px] md:rounded-[2.75rem] md:shadow-brand">
+        {/* Glow */}
+        <div className="pointer-events-none absolute -top-20 -right-16 h-72 w-72 rounded-full bg-accent/30 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-primary/40 blur-3xl" />
+
+        <div className="relative z-10 flex flex-1 flex-col px-7 pt-16 pb-10 text-primary-foreground">
+          <header className="flex items-center justify-between animate-fade-up">
+            <span className="font-extrabold text-xl tracking-tight">Aladùn</span>
+            <Link
+              to="/home"
+              className="text-xs font-semibold text-primary-foreground/70 hover:text-primary-foreground"
+            >
+              Skip
+            </Link>
+          </header>
+
+          <div className="mx-auto mt-10 animate-pop">
+            <div className="relative h-56 w-56 rounded-full bg-primary-foreground/10 p-2 ring-1 ring-primary-foreground/20 backdrop-blur-sm">
+              <img
+                src={jollof}
+                alt="Jollof rice"
+                className="h-full w-full rounded-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="mt-10 space-y-3 text-center animate-fade-up [animation-delay:120ms]">
+            <p className="text-xs uppercase tracking-[0.3em] text-primary-foreground/70">
+              ALÁDÙN
+            </p>
+            <h1 className="text-3xl font-extrabold leading-tight text-balance">
+              Order Local African Dishes
+            </h1>
+            <p className="text-sm text-primary-foreground/80">
+              Delivered hot, fresh, and joyfully to your doorstep.
+            </p>
+          </div>
+
+          <div className="relative mt-6 flex justify-center animate-fade-up [animation-delay:200ms]">
+            <img src={scooter} alt="" className="h-32 w-auto drop-shadow-xl" />
+          </div>
+
+          <div className="mt-auto space-y-3 animate-fade-up [animation-delay:280ms]">
+            <Link
+              to="/home"
+              className="block w-full rounded-2xl bg-primary-foreground py-4 text-center text-sm font-bold text-primary shadow-xl transition-transform active:scale-[0.98]"
+            >
+              Get Started
+            </Link>
+            <p className="text-center text-xs text-primary-foreground/70">
+              Already have an account?{" "}
+              <span className="font-semibold text-primary-foreground underline-offset-4 hover:underline">
+                Sign in
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
