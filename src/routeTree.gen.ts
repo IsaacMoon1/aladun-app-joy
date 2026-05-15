@@ -13,6 +13,7 @@ import { Route as TrackRouteImport } from './routes/track'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as PaymentMethodsRouteImport } from './routes/payment-methods'
+import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as OrderRouteImport } from './routes/order'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as HomeRouteImport } from './routes/home'
@@ -42,6 +43,11 @@ const ProfileRoute = ProfileRouteImport.update({
 const PaymentMethodsRoute = PaymentMethodsRouteImport.update({
   id: '/payment-methods',
   path: '/payment-methods',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdersRoute = OrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrderRoute = OrderRouteImport.update({
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
   '/notifications': typeof NotificationsRoute
   '/order': typeof OrderRoute
+  '/orders': typeof OrdersRoute
   '/payment-methods': typeof PaymentMethodsRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/home': typeof HomeRoute
   '/notifications': typeof NotificationsRoute
   '/order': typeof OrderRoute
+  '/orders': typeof OrdersRoute
   '/payment-methods': typeof PaymentMethodsRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/home': typeof HomeRoute
   '/notifications': typeof NotificationsRoute
   '/order': typeof OrderRoute
+  '/orders': typeof OrdersRoute
   '/payment-methods': typeof PaymentMethodsRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
@@ -156,6 +165,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/notifications'
     | '/order'
+    | '/orders'
     | '/payment-methods'
     | '/profile'
     | '/search'
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/notifications'
     | '/order'
+    | '/orders'
     | '/payment-methods'
     | '/profile'
     | '/search'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/notifications'
     | '/order'
+    | '/orders'
     | '/payment-methods'
     | '/profile'
     | '/search'
@@ -205,6 +217,7 @@ export interface RootRouteChildren {
   HomeRoute: typeof HomeRoute
   NotificationsRoute: typeof NotificationsRoute
   OrderRoute: typeof OrderRoute
+  OrdersRoute: typeof OrdersRoute
   PaymentMethodsRoute: typeof PaymentMethodsRoute
   ProfileRoute: typeof ProfileRoute
   SearchRoute: typeof SearchRoute
@@ -240,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/payment-methods'
       fullPath: '/payment-methods'
       preLoaderRoute: typeof PaymentMethodsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orders': {
+      id: '/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof OrdersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/order': {
@@ -325,6 +345,7 @@ const rootRouteChildren: RootRouteChildren = {
   HomeRoute: HomeRoute,
   NotificationsRoute: NotificationsRoute,
   OrderRoute: OrderRoute,
+  OrdersRoute: OrdersRoute,
   PaymentMethodsRoute: PaymentMethodsRoute,
   ProfileRoute: ProfileRoute,
   SearchRoute: SearchRoute,
