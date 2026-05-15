@@ -81,6 +81,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Aladùn — Nigerian Dishes Delivered" },
+      { name: "twitter:description", content: "Order authentic Nigerian dishes from local kitchens, delivered hot to your doorstep." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c537acbf-2943-47b6-8297-4892a7f7f88d/id-preview-a86e8032--b08d0346-b301-4d73-82da-c950abfb449f.lovable.app-1778850108094.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c537acbf-2943-47b6-8297-4892a7f7f88d/id-preview-a86e8032--b08d0346-b301-4d73-82da-c950abfb449f.lovable.app-1778850108094.png" },
     ],
     links: [
       {
