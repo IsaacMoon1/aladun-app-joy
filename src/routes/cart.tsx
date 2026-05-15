@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { PhoneShell } from "@/components/aladun/PhoneShell";
 import { useCart, cartStore, cartTotal } from "@/lib/cart-store";
@@ -11,7 +11,6 @@ export const Route = createFileRoute("/cart")({
 
 function CartPage() {
   const { items } = useCart();
-  const navigate = useNavigate();
   const subtotal = cartTotal(items);
   const delivery = items.length ? 800 : 0;
   const total = subtotal + delivery;
@@ -94,15 +93,12 @@ function CartPage() {
               <Row label="Total" value={formatNaira(total)} bold />
             </div>
 
-            <button
-              onClick={() => {
-                cartStore.clear();
-                navigate({ to: "/order" });
-              }}
-              className="mt-5 w-full rounded-2xl bg-primary py-4 text-sm font-bold text-primary-foreground shadow-brand transition active:scale-[0.98]"
+            <Link
+              to="/checkout"
+              className="mt-5 block w-full rounded-2xl bg-primary py-4 text-center text-sm font-bold text-primary-foreground shadow-brand transition active:scale-[0.98]"
             >
-              Place order · {formatNaira(total)}
-            </button>
+              Proceed to checkout · {formatNaira(total)}
+            </Link>
           </>
         )}
       </div>
