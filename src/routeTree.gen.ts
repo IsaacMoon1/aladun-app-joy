@@ -9,14 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrackRouteImport } from './routes/track'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as OrderRouteImport } from './routes/order'
 import { Route as HomeRouteImport } from './routes/home'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RestaurantDishIdRouteImport } from './routes/restaurant.$dishId'
 
+const TrackRoute = TrackRouteImport.update({
+  id: '/track',
+  path: '/track',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
@@ -35,6 +42,11 @@ const OrderRoute = OrderRouteImport.update({
 const HomeRoute = HomeRouteImport.update({
   id: '/home',
   path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -56,29 +68,35 @@ const RestaurantDishIdRoute = RestaurantDishIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/home': typeof HomeRoute
   '/order': typeof OrderRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/track': typeof TrackRoute
   '/restaurant/$dishId': typeof RestaurantDishIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/home': typeof HomeRoute
   '/order': typeof OrderRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/track': typeof TrackRoute
   '/restaurant/$dishId': typeof RestaurantDishIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/home': typeof HomeRoute
   '/order': typeof OrderRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
+  '/track': typeof TrackRoute
   '/restaurant/$dishId': typeof RestaurantDishIdRoute
 }
 export interface FileRouteTypes {
@@ -86,43 +104,58 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/cart'
+    | '/checkout'
     | '/home'
     | '/order'
     | '/profile'
     | '/search'
+    | '/track'
     | '/restaurant/$dishId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/cart'
+    | '/checkout'
     | '/home'
     | '/order'
     | '/profile'
     | '/search'
+    | '/track'
     | '/restaurant/$dishId'
   id:
     | '__root__'
     | '/'
     | '/cart'
+    | '/checkout'
     | '/home'
     | '/order'
     | '/profile'
     | '/search'
+    | '/track'
     | '/restaurant/$dishId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
   HomeRoute: typeof HomeRoute
   OrderRoute: typeof OrderRoute
   ProfileRoute: typeof ProfileRoute
   SearchRoute: typeof SearchRoute
+  TrackRoute: typeof TrackRoute
   RestaurantDishIdRoute: typeof RestaurantDishIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/track': {
+      id: '/track'
+      path: '/track'
+      fullPath: '/track'
+      preLoaderRoute: typeof TrackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
       id: '/search'
       path: '/search'
@@ -149,6 +182,13 @@ declare module '@tanstack/react-router' {
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -178,10 +218,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
   HomeRoute: HomeRoute,
   OrderRoute: OrderRoute,
   ProfileRoute: ProfileRoute,
   SearchRoute: SearchRoute,
+  TrackRoute: TrackRoute,
   RestaurantDishIdRoute: RestaurantDishIdRoute,
 }
 export const routeTree = rootRouteImport
