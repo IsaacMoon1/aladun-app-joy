@@ -5,17 +5,17 @@ import scooter from "@/assets/scooter.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aladùn — Local African Dishes Delivered" },
+      { title: "Aladùn — Nigerian Dishes Delivered" },
       {
         name: "description",
         content:
-          "Order authentic Nigerian and West African meals from local kitchens, delivered hot to your doorstep.",
+          "Order authentic Nigerian dishes from local kitchens, delivered hot to your doorstep.",
       },
-      { property: "og:title", content: "Aladùn — Local African Dishes Delivered" },
+      { property: "og:title", content: "Aladùn — Nigerian Dishes Delivered" },
       {
         property: "og:description",
         content:
-          "Order authentic Nigerian and West African meals from local kitchens, delivered hot to your doorstep.",
+          "Order authentic Nigerian dishes from local kitchens, delivered hot to your doorstep.",
       },
     ],
   }),
@@ -56,7 +56,7 @@ function Onboarding() {
               ALÁDÙN
             </p>
             <h1 className="text-3xl font-extrabold leading-tight text-balance">
-              Order Local African Dishes
+              Order Nigerian Dishes
             </h1>
             <p className="text-sm text-primary-foreground/80">
               Delivered hot, fresh, and joyfully to your doorstep.
