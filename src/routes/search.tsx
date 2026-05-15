@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Search as SearchIcon, X } from "lucide-react";
 import { PhoneShell } from "@/components/aladun/PhoneShell";
@@ -15,7 +15,7 @@ const trending = ["Jollof", "Pepper Soup", "Suya", "Amala", "Fried Rice"];
 
 function SearchPage() {
   const [q, setQ] = useState("");
-  const navigate = useNavigate();
+  
   const results = q
     ? dishes.filter(
         (d) =>
