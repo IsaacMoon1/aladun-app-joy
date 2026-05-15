@@ -29,9 +29,9 @@ function OrderPage() {
         />
 
         <div className="mt-8 w-full max-w-xs space-y-2 animate-fade-up [animation-delay:260ms]">
-          <button className="w-full rounded-2xl bg-primary py-4 text-sm font-bold text-primary-foreground shadow-brand">
+          <Link to="/track" className="block w-full rounded-2xl bg-primary py-4 text-center text-sm font-bold text-primary-foreground shadow-brand">
             Track Order
-          </button>
+          </Link>
           <Link
             to="/home"
             className="block w-full rounded-2xl border border-border bg-card py-4 text-sm font-bold"
