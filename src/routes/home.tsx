@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Bell, MapPin, Search, Star, Plus, Flame } from "lucide-react";
+import { toast } from "sonner";
+import { Bell, MapPin, Search, Star, Plus, Flame, ChevronDown } from "lucide-react";
 import { PhoneShell } from "@/components/aladun/PhoneShell";
 import { categories, dishes, restaurants, formatNaira } from "@/lib/aladun-data";
 import { cartStore } from "@/lib/cart-store";
@@ -23,13 +24,22 @@ function HomePage() {
     <PhoneShell>
       <div className="px-6 pt-12 pb-2">
         <div className="flex items-center justify-between animate-fade-up">
-          <div>
+          <button
+            onClick={() => toast("Address picker coming soon", { description: "We'll let you change delivery location here." })}
+            className="text-left"
+          >
             <p className="flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
               <MapPin className="h-3 w-3" /> Deliver to
             </p>
-            <p className="text-sm font-bold">Bodija, Ibadan</p>
-          </div>
-          <button className="relative grid h-11 w-11 place-items-center rounded-2xl bg-primary-soft text-primary">
+            <p className="flex items-center gap-1 text-sm font-bold">
+              Bodija, Ibadan <ChevronDown className="h-3.5 w-3.5" />
+            </p>
+          </button>
+          <button
+            onClick={() => toast("No new notifications", { description: "You're all caught up." })}
+            className="relative grid h-11 w-11 place-items-center rounded-2xl bg-primary-soft text-primary transition active:scale-95"
+            aria-label="Notifications"
+          >
             <Bell className="h-5 w-5" />
             <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-accent" />
           </button>
@@ -59,7 +69,10 @@ function HomePage() {
             <h3 className="mt-1 text-lg font-extrabold leading-snug">
               Free delivery on your first 3 orders
             </h3>
-            <button className="mt-3 rounded-full bg-primary-foreground px-4 py-1.5 text-xs font-bold text-primary">
+            <button
+              onClick={() => toast("🎉 Offer claimed!", { description: "Free delivery applied to your next 3 orders." })}
+              className="mt-3 rounded-full bg-primary-foreground px-4 py-1.5 text-xs font-bold text-primary transition active:scale-95"
+            >
               Claim offer
             </button>
           </div>
@@ -114,7 +127,7 @@ function HomePage() {
           <h2 className="flex items-center gap-1.5 text-base font-bold">
             <Flame className="h-4 w-4 text-accent" /> Popular Dishes
           </h2>
-          <span className="text-xs font-semibold text-primary">View all</span>
+          <Link to="/search" className="text-xs font-semibold text-primary">View all</Link>
         </div>
         <div className="mt-3 flex gap-4 overflow-x-auto px-6 pb-2 no-scrollbar">
           {filtered.map((d) => (
@@ -138,7 +151,9 @@ function HomePage() {
                   <button
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       cartStore.add(d.id);
+                      toast(`Added ${d.name}`, { description: "Item added to your cart." });
                     }}
                     className="grid h-8 w-8 place-items-center rounded-full bg-foreground text-background transition active:scale-90"
                     aria-label="Add to cart"
@@ -156,37 +171,42 @@ function HomePage() {
       <section className="mt-6 px-6">
         <div className="flex items-center justify-between">
           <h2 className="text-base font-bold">Popular Restaurants</h2>
-          <span className="text-xs font-semibold text-primary">See all</span>
+          <Link to="/search" className="text-xs font-semibold text-primary">See all</Link>
         </div>
         <div className="mt-3 space-y-3">
-          {restaurants.map((r) => (
-            <div
-              key={r.id}
-              className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-card"
-            >
-              <img
-                src={r.image}
-                alt={r.name}
-                loading="lazy"
-                className="h-16 w-16 rounded-xl object-cover"
-              />
-              <div className="flex-1">
-                <div className="flex items-start justify-between">
-                  <p className="text-sm font-bold text-primary">{r.name}</p>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-bold">
-                    <Star className="h-3 w-3 fill-accent text-accent" /> {r.rating}
-                  </span>
+          {restaurants.map((r) => {
+            const dish = dishes.find((d) => d.restaurant === r.name) ?? dishes[0];
+            return (
+              <Link
+                key={r.id}
+                to="/restaurant/$dishId"
+                params={{ dishId: dish.id }}
+                className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3 shadow-card transition active:scale-[0.99]"
+              >
+                <img
+                  src={r.image}
+                  alt={r.name}
+                  loading="lazy"
+                  className="h-16 w-16 rounded-xl object-cover"
+                />
+                <div className="flex-1">
+                  <div className="flex items-start justify-between">
+                    <p className="text-sm font-bold text-primary">{r.name}</p>
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold">
+                      <Star className="h-3 w-3 fill-accent text-accent" /> {r.rating}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground">{r.area}</p>
+                  <div className="mt-1 flex items-center gap-2 text-[10px] text-muted-foreground">
+                    <span className="rounded-full bg-primary-soft px-2 py-0.5 font-semibold text-primary">
+                      {r.time}
+                    </span>
+                    <span className="rounded-full bg-muted px-2 py-0.5 font-semibold">Free delivery</span>
+                  </div>
                 </div>
-                <p className="text-[11px] text-muted-foreground">{r.area}</p>
-                <div className="mt-1 flex items-center gap-2 text-[10px] text-muted-foreground">
-                  <span className="rounded-full bg-primary-soft px-2 py-0.5 font-semibold text-primary">
-                    {r.time}
-                  </span>
-                  <span className="rounded-full bg-muted px-2 py-0.5 font-semibold">Free delivery</span>
-                </div>
-              </div>
-            </div>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       </section>
     </PhoneShell>
