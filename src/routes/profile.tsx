@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { ChevronRight, MapPin, CreditCard, Bell, HelpCircle, LogOut, Heart, Package } from "lucide-react";
+import { ChevronRight, MapPin, CreditCard, Bell, HelpCircle, LogOut, Heart, Package, Store, ShieldCheck } from "lucide-react";
 import { PhoneShell } from "@/components/aladun/PhoneShell";
 
 export const Route = createFileRoute("/profile")({
