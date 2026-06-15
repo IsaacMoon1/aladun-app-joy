@@ -1,7 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { ChevronRight, MapPin, CreditCard, Bell, HelpCircle, LogOut, Heart, Package, Store, ShieldCheck } from "lucide-react";
 import { PhoneShell } from "@/components/aladun/PhoneShell";
+import { useAuth, authStore } from "@/lib/auth-store";
 
 export const Route = createFileRoute("/profile")({
   head: () => ({ meta: [{ title: "Profile — Aladùn" }] }),
@@ -18,6 +19,17 @@ const items = [
 ];
 
 function ProfilePage() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const name = user?.name || "Guest User";
+  const email = user?.email || "guest@aladun.app";
+  const initials = name
+    .split(" ")
+    .map((p) => p[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+
   return (
     <PhoneShell>
       <div className="bg-gradient-brand px-6 pt-14 pb-20 text-primary-foreground">
@@ -27,11 +39,11 @@ function ProfilePage() {
         <div className="rounded-3xl border border-border bg-card p-5 shadow-card">
           <div className="flex items-center gap-4">
             <div className="grid h-16 w-16 place-items-center rounded-full bg-primary-soft text-2xl font-extrabold text-primary">
-              IA
+              {initials}
             </div>
             <div>
-              <p className="text-base font-extrabold">Isaac Adeyemi</p>
-              <p className="text-xs text-muted-foreground">isaac@aladun.app</p>
+              <p className="text-base font-extrabold">{name}</p>
+              <p className="text-xs text-muted-foreground">{email}</p>
               <p className="mt-1 inline-block rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-bold text-accent">
                 Gold member
               </p>
