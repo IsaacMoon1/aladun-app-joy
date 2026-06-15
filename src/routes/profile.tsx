@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { ChevronRight, MapPin, CreditCard, Bell, HelpCircle, LogOut, Heart, Package } from "lucide-react";
+import { ChevronRight, MapPin, CreditCard, Bell, HelpCircle, LogOut, Heart, Package, Store, ShieldCheck } from "lucide-react";
 import { PhoneShell } from "@/components/aladun/PhoneShell";
 
 export const Route = createFileRoute("/profile")({
@@ -69,6 +69,29 @@ function ProfilePage() {
             </li>
           ))}
         </ul>
+
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          <Link
+            to="/partner"
+            className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-4 shadow-card"
+          >
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-accent/15 text-accent">
+              <Store className="h-4 w-4" />
+            </span>
+            <p className="text-sm font-extrabold leading-tight">Become a partner</p>
+            <p className="text-[10px] text-muted-foreground">List your restaurant</p>
+          </Link>
+          <Link
+            to="/admin"
+            className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-4 shadow-card"
+          >
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary-soft text-primary">
+              <ShieldCheck className="h-4 w-4" />
+            </span>
+            <p className="text-sm font-extrabold leading-tight">Admin dashboard</p>
+            <p className="text-[10px] text-muted-foreground">Approve partners</p>
+          </Link>
+        </div>
 
         <button
           onClick={() => toast("Signed out", { description: "Come back hungry 👋" })}
