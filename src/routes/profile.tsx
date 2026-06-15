@@ -106,7 +106,11 @@ function ProfilePage() {
         </div>
 
         <button
-          onClick={() => toast("Signed out", { description: "Come back hungry 👋" })}
+          onClick={() => {
+            authStore.signOut();
+            toast("Signed out", { description: "Come back hungry 👋" });
+            navigate({ to: "/" });
+          }}
           className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl border border-destructive/20 bg-destructive/5 py-3.5 text-sm font-bold text-destructive"
         >
           <LogOut className="h-4 w-4" /> Sign out
