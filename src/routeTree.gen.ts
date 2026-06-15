@@ -13,6 +13,8 @@ import { Route as TrackRouteImport } from './routes/track'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as PaymentMethodsRouteImport } from './routes/payment-methods'
+import { Route as PartnerSuccessRouteImport } from './routes/partner-success'
+import { Route as PartnerRouteImport } from './routes/partner'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as OrderRouteImport } from './routes/order'
 import { Route as NotificationsRouteImport } from './routes/notifications'
@@ -21,6 +23,7 @@ import { Route as HelpRouteImport } from './routes/help'
 import { Route as FavouritesRouteImport } from './routes/favourites'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AddressesRouteImport } from './routes/addresses'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RestaurantDishIdRouteImport } from './routes/restaurant.$dishId'
@@ -43,6 +46,16 @@ const ProfileRoute = ProfileRouteImport.update({
 const PaymentMethodsRoute = PaymentMethodsRouteImport.update({
   id: '/payment-methods',
   path: '/payment-methods',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerSuccessRoute = PartnerSuccessRouteImport.update({
+  id: '/partner-success',
+  path: '/partner-success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerRoute = PartnerRouteImport.update({
+  id: '/partner',
+  path: '/partner',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersRoute = OrdersRouteImport.update({
@@ -85,6 +98,11 @@ const CartRoute = CartRouteImport.update({
   path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AddressesRoute = AddressesRouteImport.update({
   id: '/addresses',
   path: '/addresses',
@@ -104,6 +122,7 @@ const RestaurantDishIdRoute = RestaurantDishIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/addresses': typeof AddressesRoute
+  '/admin': typeof AdminRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/favourites': typeof FavouritesRoute
@@ -112,6 +131,8 @@ export interface FileRoutesByFullPath {
   '/notifications': typeof NotificationsRoute
   '/order': typeof OrderRoute
   '/orders': typeof OrdersRoute
+  '/partner': typeof PartnerRoute
+  '/partner-success': typeof PartnerSuccessRoute
   '/payment-methods': typeof PaymentMethodsRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
@@ -121,6 +142,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/addresses': typeof AddressesRoute
+  '/admin': typeof AdminRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/favourites': typeof FavouritesRoute
@@ -129,6 +151,8 @@ export interface FileRoutesByTo {
   '/notifications': typeof NotificationsRoute
   '/order': typeof OrderRoute
   '/orders': typeof OrdersRoute
+  '/partner': typeof PartnerRoute
+  '/partner-success': typeof PartnerSuccessRoute
   '/payment-methods': typeof PaymentMethodsRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
@@ -139,6 +163,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/addresses': typeof AddressesRoute
+  '/admin': typeof AdminRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/favourites': typeof FavouritesRoute
@@ -147,6 +172,8 @@ export interface FileRoutesById {
   '/notifications': typeof NotificationsRoute
   '/order': typeof OrderRoute
   '/orders': typeof OrdersRoute
+  '/partner': typeof PartnerRoute
+  '/partner-success': typeof PartnerSuccessRoute
   '/payment-methods': typeof PaymentMethodsRoute
   '/profile': typeof ProfileRoute
   '/search': typeof SearchRoute
@@ -158,6 +185,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/addresses'
+    | '/admin'
     | '/cart'
     | '/checkout'
     | '/favourites'
@@ -166,6 +194,8 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/order'
     | '/orders'
+    | '/partner'
+    | '/partner-success'
     | '/payment-methods'
     | '/profile'
     | '/search'
@@ -175,6 +205,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/addresses'
+    | '/admin'
     | '/cart'
     | '/checkout'
     | '/favourites'
@@ -183,6 +214,8 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/order'
     | '/orders'
+    | '/partner'
+    | '/partner-success'
     | '/payment-methods'
     | '/profile'
     | '/search'
@@ -192,6 +225,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/addresses'
+    | '/admin'
     | '/cart'
     | '/checkout'
     | '/favourites'
@@ -200,6 +234,8 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/order'
     | '/orders'
+    | '/partner'
+    | '/partner-success'
     | '/payment-methods'
     | '/profile'
     | '/search'
@@ -210,6 +246,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AddressesRoute: typeof AddressesRoute
+  AdminRoute: typeof AdminRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
   FavouritesRoute: typeof FavouritesRoute
@@ -218,6 +255,8 @@ export interface RootRouteChildren {
   NotificationsRoute: typeof NotificationsRoute
   OrderRoute: typeof OrderRoute
   OrdersRoute: typeof OrdersRoute
+  PartnerRoute: typeof PartnerRoute
+  PartnerSuccessRoute: typeof PartnerSuccessRoute
   PaymentMethodsRoute: typeof PaymentMethodsRoute
   ProfileRoute: typeof ProfileRoute
   SearchRoute: typeof SearchRoute
@@ -253,6 +292,20 @@ declare module '@tanstack/react-router' {
       path: '/payment-methods'
       fullPath: '/payment-methods'
       preLoaderRoute: typeof PaymentMethodsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner-success': {
+      id: '/partner-success'
+      path: '/partner-success'
+      fullPath: '/partner-success'
+      preLoaderRoute: typeof PartnerSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner': {
+      id: '/partner'
+      path: '/partner'
+      fullPath: '/partner'
+      preLoaderRoute: typeof PartnerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders': {
@@ -311,6 +364,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/addresses': {
       id: '/addresses'
       path: '/addresses'
@@ -338,6 +398,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AddressesRoute: AddressesRoute,
+  AdminRoute: AdminRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
   FavouritesRoute: FavouritesRoute,
@@ -346,6 +407,8 @@ const rootRouteChildren: RootRouteChildren = {
   NotificationsRoute: NotificationsRoute,
   OrderRoute: OrderRoute,
   OrdersRoute: OrdersRoute,
+  PartnerRoute: PartnerRoute,
+  PartnerSuccessRoute: PartnerSuccessRoute,
   PaymentMethodsRoute: PaymentMethodsRoute,
   ProfileRoute: ProfileRoute,
   SearchRoute: SearchRoute,
@@ -355,13 +418,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
