@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { toast } from "sonner";
+import { authStore } from "@/lib/auth-store";
 import jollof from "@/assets/jollof.jpg";
 import scooter from "@/assets/scooter.png";
 
@@ -23,22 +25,35 @@ export const Route = createFileRoute("/")({
 });
 
 function Onboarding() {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    if (authStore.hasAccount()) {
+      const ok = authStore.signIn();
+      if (ok) {
+        toast.success("Welcome back 👋");
+        navigate({ to: "/home" });
+        return;
+      }
+    }
+    navigate({ to: "/auth", search: { mode: "signup" } });
+  };
+
   return (
     <div className="min-h-dvh bg-muted/40 md:py-10">
       <div className="relative mx-auto flex min-h-dvh w-full max-w-md flex-col overflow-hidden bg-gradient-brand md:min-h-[860px] md:rounded-[2.75rem] md:shadow-brand">
-        {/* Glow */}
         <div className="pointer-events-none absolute -top-20 -right-16 h-72 w-72 rounded-full bg-accent/30 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-primary/40 blur-3xl" />
 
         <div className="relative z-10 flex flex-1 flex-col px-7 pt-16 pb-10 text-primary-foreground">
           <header className="flex items-center justify-between animate-fade-up">
             <span className="font-extrabold text-xl tracking-tight">Aladùn</span>
-            <Link
-              to="/home"
+            <button
+              onClick={() => navigate({ to: "/home" })}
               className="text-xs font-semibold text-primary-foreground/70 hover:text-primary-foreground"
             >
               Skip
-            </Link>
+            </button>
           </header>
 
           <div className="mx-auto mt-10 animate-pop">
@@ -68,17 +83,20 @@ function Onboarding() {
           </div>
 
           <div className="mt-auto space-y-3 animate-fade-up [animation-delay:280ms]">
-            <Link
-              to="/home"
+            <button
+              onClick={handleGetStarted}
               className="block w-full rounded-2xl bg-primary-foreground py-4 text-center text-sm font-bold text-primary shadow-xl transition-transform active:scale-[0.98]"
             >
               Get Started
-            </Link>
+            </button>
             <p className="text-center text-xs text-primary-foreground/70">
               Already have an account?{" "}
-              <span className="font-semibold text-primary-foreground underline-offset-4 hover:underline">
+              <button
+                onClick={() => navigate({ to: "/auth", search: { mode: "signin" } })}
+                className="font-semibold text-primary-foreground underline-offset-4 hover:underline"
+              >
                 Sign in
-              </span>
+              </button>
             </p>
           </div>
         </div>
