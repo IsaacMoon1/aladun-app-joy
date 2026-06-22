@@ -3,6 +3,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { ArrowLeft, Mail, Lock, User, Phone, Eye, EyeOff } from "lucide-react";
 import { authStore } from "@/lib/auth-store";
+import aladunLogo from "@/assets/aladun-logo.jpg.asset.json";
 
 export const Route = createFileRoute("/auth")({
   validateSearch: (s: Record<string, unknown>) => ({
