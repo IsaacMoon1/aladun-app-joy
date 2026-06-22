@@ -63,12 +63,20 @@ function Onboarding() {
           </header>
 
           <div className="mx-auto mt-10 animate-pop">
-            <div className="relative h-56 w-56 rounded-full bg-primary-foreground/10 p-2 ring-1 ring-primary-foreground/20 backdrop-blur-sm">
-              <img
-                src={jollof}
-                alt="Jollof rice"
-                className="h-full w-full rounded-full object-cover"
-              />
+            <div className="relative grid h-56 w-56 place-items-center rounded-full bg-primary-foreground/10 p-2 ring-1 ring-primary-foreground/20 backdrop-blur-sm">
+              <div className="absolute inset-3 rounded-full bg-gradient-to-br from-primary-foreground/15 to-transparent ring-1 ring-primary-foreground/15" />
+              <div className="relative text-center">
+                <span
+                  className="block bg-gradient-to-b from-primary-foreground to-primary-foreground/70 bg-clip-text text-5xl font-black tracking-tight text-transparent drop-shadow-[0_4px_18px_rgba(0,0,0,0.25)]"
+                  style={{ fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif', letterSpacing: '-0.02em' }}
+                >
+                  ALÁDÙN
+                </span>
+                <span className="mx-auto mt-2 block h-[2px] w-12 rounded-full bg-primary-foreground/60" />
+                <span className="mt-2 block text-[10px] font-semibold uppercase tracking-[0.4em] text-primary-foreground/70">
+                  Taste of Home
+                </span>
+              </div>
             </div>
           </div>
 
