@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { authStore } from "@/lib/auth-store";
-import jollof from "@/assets/jollof.jpg";
+
 import scooter from "@/assets/scooter.png";
 import aladunLogo from "@/assets/aladun-logo.jpg.asset.json";
 
