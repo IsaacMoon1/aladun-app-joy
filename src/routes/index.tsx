@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { authStore } from "@/lib/auth-store";
 import jollof from "@/assets/jollof.jpg";
 import scooter from "@/assets/scooter.png";
+import aladunLogo from "@/assets/aladun-logo.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,7 +48,12 @@ function Onboarding() {
 
         <div className="relative z-10 flex flex-1 flex-col px-7 pt-16 pb-10 text-primary-foreground">
           <header className="flex items-center justify-between animate-fade-up">
-            <span className="font-extrabold text-xl tracking-tight">Aladùn</span>
+            <span className="flex items-center gap-2">
+              <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary-foreground/15 ring-1 ring-primary-foreground/25 backdrop-blur-sm overflow-hidden">
+                <img src={aladunLogo.url} alt="Aladùn logo" className="h-full w-full object-cover" />
+              </span>
+              <span className="font-extrabold text-xl tracking-tight">Aladùn</span>
+            </span>
             <button
               onClick={() => navigate({ to: "/home" })}
               className="text-xs font-semibold text-primary-foreground/70 hover:text-primary-foreground"
