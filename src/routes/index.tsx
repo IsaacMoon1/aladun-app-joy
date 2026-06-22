@@ -77,7 +77,7 @@ function Onboarding() {
               ALÁDÙN
             </p>
             <h1 className="text-3xl font-extrabold leading-tight text-balance">
-              Order Nigerian Dishes
+              Order Nigerian Swallow Dishes
             </h1>
             <p className="text-sm text-primary-foreground/80">
               Delivered hot, fresh, and joyfully to your doorstep.
