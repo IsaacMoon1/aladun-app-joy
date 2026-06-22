@@ -47,12 +47,20 @@ function AuthPage() {
     <div className="min-h-dvh bg-muted/40 md:py-10">
       <div className="relative mx-auto flex min-h-dvh w-full max-w-md flex-col overflow-hidden bg-background md:min-h-[860px] md:rounded-[2.75rem] md:border md:border-border md:shadow-card">
         <div className="bg-gradient-brand px-6 pt-12 pb-10 text-primary-foreground">
-          <button
-            onClick={() => navigate({ to: "/" })}
-            className="grid h-9 w-9 place-items-center rounded-full bg-primary-foreground/15"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </button>
+          <div className="flex items-center justify-between">
+            <button
+              onClick={() => navigate({ to: "/" })}
+              className="grid h-9 w-9 place-items-center rounded-full bg-primary-foreground/15"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+            <span className="flex items-center gap-2">
+              <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary-foreground/15 ring-1 ring-primary-foreground/25 overflow-hidden">
+                <img src={aladunLogo.url} alt="Aladùn logo" className="h-full w-full object-cover" />
+              </span>
+              <span className="font-extrabold text-lg tracking-tight">Aladùn</span>
+            </span>
+          </div>
           <h1 className="mt-5 text-3xl font-extrabold">
             {tab === "signup" ? "Create account" : "Welcome back"}
           </h1>
