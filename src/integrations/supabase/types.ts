@@ -14,7 +14,165 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          emoji: string | null
+          id: string
+          name: string
+          pillar: Database["public"]["Enums"]["pillar"]
+          slug: string
+          sort_order: number
+        }
+        Insert: {
+          emoji?: string | null
+          id?: string
+          name: string
+          pillar?: Database["public"]["Enums"]["pillar"]
+          slug: string
+          sort_order?: number
+        }
+        Update: {
+          emoji?: string | null
+          id?: string
+          name?: string
+          pillar?: Database["public"]["Enums"]["pillar"]
+          slug?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          category_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          image_key: string | null
+          is_available: boolean
+          is_popular: boolean
+          name: string
+          price_kobo: number
+          rating: number | null
+          rating_count: number
+          slug: string
+          unit: Database["public"]["Enums"]["product_unit"]
+          unit_amount: number | null
+          updated_at: string
+          vendor_id: string
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_key?: string | null
+          is_available?: boolean
+          is_popular?: boolean
+          name: string
+          price_kobo: number
+          rating?: number | null
+          rating_count?: number
+          slug: string
+          unit?: Database["public"]["Enums"]["product_unit"]
+          unit_amount?: number | null
+          updated_at?: string
+          vendor_id: string
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_key?: string | null
+          is_available?: boolean
+          is_popular?: boolean
+          name?: string
+          price_kobo?: number
+          rating?: number | null
+          rating_count?: number
+          slug?: string
+          unit?: Database["public"]["Enums"]["product_unit"]
+          unit_amount?: number | null
+          updated_at?: string
+          vendor_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "products_vendor_id_fkey"
+            columns: ["vendor_id"]
+            isOneToOne: false
+            referencedRelation: "vendors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      vendors: {
+        Row: {
+          approval_status: Database["public"]["Enums"]["approval_status"]
+          area: string
+          city: string
+          created_at: string
+          delivery_minutes_max: number
+          delivery_minutes_min: number
+          description: string | null
+          id: string
+          image_key: string | null
+          is_active: boolean
+          kind: Database["public"]["Enums"]["vendor_kind"]
+          name: string
+          pillar: Database["public"]["Enums"]["pillar"]
+          rating: number | null
+          rating_count: number
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          approval_status?: Database["public"]["Enums"]["approval_status"]
+          area: string
+          city?: string
+          created_at?: string
+          delivery_minutes_max?: number
+          delivery_minutes_min?: number
+          description?: string | null
+          id?: string
+          image_key?: string | null
+          is_active?: boolean
+          kind?: Database["public"]["Enums"]["vendor_kind"]
+          name: string
+          pillar?: Database["public"]["Enums"]["pillar"]
+          rating?: number | null
+          rating_count?: number
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          approval_status?: Database["public"]["Enums"]["approval_status"]
+          area?: string
+          city?: string
+          created_at?: string
+          delivery_minutes_max?: number
+          delivery_minutes_min?: number
+          description?: string | null
+          id?: string
+          image_key?: string | null
+          is_active?: boolean
+          kind?: Database["public"]["Enums"]["vendor_kind"]
+          name?: string
+          pillar?: Database["public"]["Enums"]["pillar"]
+          rating?: number | null
+          rating_count?: number
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +181,17 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      approval_status: "pending" | "approved" | "rejected"
+      pillar: "chop" | "market" | "send"
+      product_unit: "piece" | "kg" | "pack" | "bundle"
+      vendor_kind:
+        | "restaurant"
+        | "bukka"
+        | "home_kitchen"
+        | "supermarket"
+        | "grocery"
+        | "pharmacy"
+        | "livestock"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +318,19 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      approval_status: ["pending", "approved", "rejected"],
+      pillar: ["chop", "market", "send"],
+      product_unit: ["piece", "kg", "pack", "bundle"],
+      vendor_kind: [
+        "restaurant",
+        "bukka",
+        "home_kitchen",
+        "supermarket",
+        "grocery",
+        "pharmacy",
+        "livestock",
+      ],
+    },
   },
 } as const
